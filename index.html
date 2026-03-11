@@ -56,6 +56,7 @@ nav{position:fixed;top:0;width:100%;padding:0 40px;height:56px;display:flex;alig
 .meta-k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
 .meta-v{font-size:12px;color:var(--text-mid);letter-spacing:.03em}
 .proj-list{display:flex;flex-direction:column}
+/* FIX: .proj è ora un div cliccabile, non un anchor */
 .proj{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:32px;padding:36px 0;border-bottom:1px solid var(--line);text-decoration:none;cursor:pointer;position:relative;transition:border-color .3s}
 .proj:first-child{border-top:1px solid var(--line)}
 .proj::after{content:'';position:absolute;left:-40px;right:-40px;top:0;bottom:0;background:var(--accent-dim);opacity:0;transition:opacity .3s;z-index:0}
@@ -67,6 +68,8 @@ nav{position:fixed;top:0;width:100%;padding:0 40px;height:56px;display:flex;alig
 .proj-info h3{font-size:18px;font-weight:300;color:var(--text);letter-spacing:-.02em;margin-bottom:4px;transition:color .25s}
 .proj:hover .proj-info h3{color:var(--accent)}
 .proj-info p{font-size:11px;color:var(--text-dim);letter-spacing:.04em}
+/* FIX: link nei titoli dei progetti — stile coerente, nessun anchor annidato */
+.proj-info h3 a{color:inherit;text-decoration:none;pointer-events:none}
 .proj-chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--line);padding:5px 9px;transition:all .25s}
 .proj:hover .chip{border-color:var(--line-h);color:var(--text-mid)}
@@ -146,7 +149,7 @@ footer{position:relative;z-index:1;padding:24px 40px;display:flex;align-items:ce
     </p>
     <div class="hero-index">
       <span>Portfolio</span><br>
-      <span>2025</span><br>
+      <span>2026</span><br>
       <span style="color:var(--accent)">●</span>
     </div>
   </div>
@@ -190,7 +193,9 @@ footer{position:relative;z-index:1;padding:24px 40px;display:flex;align-items:ce
     <span class="sec-num">02</span>
   </div>
   <div class="proj-list">
-    <a class="proj reveal" href="#">
+
+    <!-- FIX: div cliccabile via JS, nessun <a> annidato -->
+    <div class="proj reveal" data-href="#" role="link" tabindex="0">
       <span class="proj-n">01</span>
       <div class="proj-info">
         <h3>Project Lumi</h3>
@@ -199,27 +204,30 @@ footer{position:relative;z-index:1;padding:24px 40px;display:flex;align-items:ce
       <div class="proj-chips">
         <span class="chip">Python</span><span class="chip">Linux</span>
       </div>
-    </a>
-    <a class="proj reveal" href="#">
+    </div>
+
+    <div class="proj reveal" data-href="https://github.com/Ryuzakxx/OriAntica" role="link" tabindex="0">
       <span class="proj-n">02</span>
       <div class="proj-info">
-        <h3><a href="https://github.com/Ryuzakxx/OriAntica" target="_blank">OriAntica</a> <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;vertical-align:middle;margin-left:8px" data-en="in dev" data-it="in sviluppo">in dev</span></h3>
+        <h3>OriAntica <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;vertical-align:middle;margin-left:8px" data-en="in dev" data-it="in sviluppo">in dev</span></h3>
         <p data-en="History &amp; legends of Oria (BR) — 2026" data-it="Storia e leggende di Oria (BR) — 2026">History &amp; legends of Oria (BR) — 2026</p>
       </div>
       <div class="proj-chips">
         <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
       </div>
-    </a>
-    <a class="proj reveal" href="#">
+    </div>
+
+    <div class="proj reveal" data-href="https://github.com/Ryuzakxx/MovieIndex" role="link" tabindex="0">
       <span class="proj-n">03</span>
       <div class="proj-info">
-        <h3><a href="https://github.com/Ryuzakxx/MovieIndex" target="_blank">Movie Index</a></h3>
+        <h3>Movie Index</h3>
         <p data-en="Studio Ghibli film catalog — 2025" data-it="Catalogo film Studio Ghibli — 2025">Studio Ghibli film catalog — 2025</p>
       </div>
       <div class="proj-chips">
         <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
       </div>
-    </a>
+    </div>
+
   </div>
 </div>
 
@@ -252,24 +260,45 @@ footer{position:relative;z-index:1;padding:24px 40px;display:flex;align-items:ce
   </div>
 </div>
 
+<!-- FIX: anno aggiornato a 2026 -->
 <footer>
   <span class="ft-l" data-en="© 2026 Francesco Moretto" data-it="© 2026 Francesco Moretto">© 2026 Francesco Moretto</span>
   <span class="ft-r" data-en="Designed with precision." data-it="Progettato con precisione.">Designed with precision.</span>
 </footer>
 
 <script>
+// Theme
 const themeBtn=document.getElementById('themeToggle');
 let theme=localStorage.getItem('theme')||'dark';
 setTheme(theme);
 themeBtn.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('theme',theme);setTheme(theme)});
 function setTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀':'☾'}
 
+// Language
 const langBtn=document.getElementById('langToggle');
 let lang=localStorage.getItem('lang')||'en';
 document.documentElement.lang=lang;applyLang();
 langBtn.addEventListener('click',()=>{lang=lang==='en'?'it':'en';localStorage.setItem('lang',lang);document.documentElement.lang=lang;applyLang()});
-function applyLang(){document.querySelectorAll('[data-en][data-it]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v});langBtn.textContent=lang==='en'?'IT':'EN'}
+function applyLang(){
+  document.querySelectorAll('[data-en][data-it]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v});
+  langBtn.textContent=lang==='en'?'IT':'EN';
+}
 
+// FIX: navigazione sui .proj tramite JS (evita anchor annidati)
+document.querySelectorAll('.proj[data-href]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const href=el.getAttribute('data-href');
+    if(href&&href!=='#') window.open(href,'_blank','noopener noreferrer');
+  });
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      el.click();
+    }
+  });
+});
+
+// Reveal on scroll
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);obs.unobserve(e.target)}})},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
