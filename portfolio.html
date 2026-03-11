@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Francesco Moretto — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="dark"]{
+  --bg:#0d0d0d;--bg-nav:rgba(13,13,13,0.72);--bg-card:#141414;--bg-card-h:#1a1a1a;
+  --text:#f0f0f0;--text-mid:#666;--text-dim:#333;
+  --line:rgba(255,255,255,0.07);--line-h:rgba(255,255,255,0.16);--dot:rgba(255,255,255,0.1);
+  --accent:#ff3c3c;--accent-dim:rgba(255,60,60,0.08);
+}
+[data-theme="light"]{
+  --bg:#f5f5f3;--bg-nav:rgba(245,245,243,0.82);--bg-card:#e8e8e6;--bg-card-h:#dededb;
+  --text:#0d0d0d;--text-mid:#444;--text-dim:#777;
+  --line:rgba(0,0,0,0.12);--line-h:rgba(0,0,0,0.28);--dot:rgba(0,0,0,0.1);
+  --accent:#cc1f1f;--accent-dim:rgba(204,31,31,0.07);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,var(--dot) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0;transition:opacity .35s}
+nav{position:fixed;top:0;width:100%;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:var(--bg-nav);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--line);z-index:200;transition:background .35s,border-color .35s}
+.logo{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;box-shadow:0 0 8px var(--accent);animation:dotPulse 3s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.nav-links{display:flex;gap:32px;list-style:none;position:absolute;left:50%;transform:translateX(-50%)}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-controls{display:flex;align-items:center;gap:8px}
+.nav-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--text-mid);padding:6px 10px;cursor:pointer;transition:all .2s;height:28px;display:flex;align-items:center}
+.nav-btn:hover{color:var(--text);border-color:var(--line-h)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 56px;position:relative;z-index:1}
+.hero-status{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);margin-bottom:40px;opacity:0;animation:up .6s .2s forwards}
+.status-ring{width:16px;height:16px;border:1px solid var(--line-h);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.status-ring::after{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;box-shadow:0 0 6px var(--accent)}
+.hero h1{font-family:'DM Sans',sans-serif;font-size:clamp(48px,7.5vw,100px);font-weight:200;line-height:1.0;letter-spacing:-.04em;color:var(--text);opacity:0;animation:up .7s .35s forwards}
+.hero h1 em{font-style:italic;font-weight:200;color:var(--accent)}
+.hero-meta{display:flex;align-items:flex-end;justify-content:space-between;margin-top:48px;border-top:1px solid var(--line);padding-top:24px;opacity:0;animation:up .6s .55s forwards}
+.hero-desc{font-size:13px;color:var(--text-mid);max-width:300px;line-height:1.75;letter-spacing:.01em}
+.hero-index{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.15em;text-align:right;line-height:2}
+.wrap{position:relative;z-index:1;padding:120px 40px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.sec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim)}
+.sec-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--text-dim)}
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:80px;align-items:start}
+.about-copy{font-size:clamp(18px,2.2vw,26px);font-weight:200;line-height:1.65;letter-spacing:-.02em;color:var(--text)}
+.about-copy strong{color:var(--accent);font-weight:300}
+.meta-table{display:flex;flex-direction:column}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);transition:border-color .2s}
+.meta-row:hover{border-color:var(--line-h)}
+.meta-row:first-child{border-top:1px solid var(--line)}
+.meta-k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.meta-v{font-size:12px;color:var(--text-mid);letter-spacing:.03em}
+.proj-list{display:flex;flex-direction:column}
+.proj{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:32px;padding:36px 0;border-bottom:1px solid var(--line);text-decoration:none;cursor:pointer;position:relative;transition:border-color .3s}
+.proj:first-child{border-top:1px solid var(--line)}
+.proj::after{content:'';position:absolute;left:-40px;right:-40px;top:0;bottom:0;background:var(--accent-dim);opacity:0;transition:opacity .3s;z-index:0}
+.proj:hover::after{opacity:1}
+.proj:hover{border-color:var(--line-h)}
+.proj > *{position:relative;z-index:1}
+.proj-n{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.1em;transition:color .25s}
+.proj:hover .proj-n{color:var(--accent)}
+.proj-info h3{font-size:18px;font-weight:300;color:var(--text);letter-spacing:-.02em;margin-bottom:4px;transition:color .25s}
+.proj:hover .proj-info h3{color:var(--accent)}
+.proj-info p{font-size:11px;color:var(--text-dim);letter-spacing:.04em}
+.proj-chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--line);padding:5px 9px;transition:all .25s}
+.proj:hover .chip{border-color:var(--line-h);color:var(--text-mid)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}
+.sk{padding:36px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-card);transition:background .25s;position:relative;overflow:hidden}
+.sk:nth-child(3n){border-right:none}
+.sk:nth-last-child(-n+3){border-bottom:none}
+.sk:hover{background:var(--bg-card-h)}
+.sk::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.25,.46,.45,.94)}
+.sk:hover::before{transform:scaleX(1)}
+.sk-ico{font-family:'DM Mono',monospace;font-size:13px;color:var(--accent);margin-bottom:20px;letter-spacing:.05em}
+.sk h4{font-size:13px;font-weight:400;color:var(--text);margin-bottom:8px;letter-spacing:-.01em}
+.sk p{font-size:11px;color:var(--text-dim);line-height:1.65;letter-spacing:.02em}
+.contact-wrap{position:relative;z-index:1;padding:140px 40px 160px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.contact-wrap .sec-head{width:100%;margin-bottom:72px}
+.contact-h{font-size:clamp(28px,4.5vw,52px);font-weight:200;color:var(--text);letter-spacing:-.04em;line-height:1.15;margin-bottom:16px}
+.contact-sub{font-size:12px;color:var(--text-mid);margin-bottom:48px;letter-spacing:.03em}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;padding:12px 24px;border:1px solid var(--line);transition:all .3s;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:var(--text);transform:translateY(101%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);z-index:0}
+.cta:hover::before{transform:translateY(0)}
+.cta:hover{color:var(--bg);border-color:var(--text)}
+.cta span{position:relative;z-index:1}
+.cta-primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.cta-primary::before{background:var(--accent)}
+.cta-primary:hover{color:#fff;border-color:var(--accent)}
+footer{position:relative;z-index:1;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line)}
+.ft-l,.ft-r{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .65s cubic-bezier(.25,.46,.45,.94),transform .65s cubic-bezier(.25,.46,.45,.94)}
+.reveal.in{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:768px){
+  nav{padding:0 20px}.nav-links{display:none}
+  .hero,.wrap,.contact-wrap{padding-left:20px;padding-right:20px}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .sk:nth-child(3n){border-right:1px solid var(--line)}.sk:nth-child(2n){border-right:none}
+  .proj{grid-template-columns:48px 1fr}.proj-chips{display:none}
+  footer{padding:20px}
+}
+@media(max-width:480px){.skills-grid{grid-template-columns:1fr}.sk:nth-child(n){border-right:none}.hero h1{font-size:42px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-dot"></span>
+    <span>F. Moretto</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about"    data-en="About"    data-it="Chi sono">About</a></li>
+    <li><a href="#projects" data-en="Work"     data-it="Lavoro">Work</a></li>
+    <li><a href="#skills"   data-en="Skills"   data-it="Competenze">Skills</a></li>
+    <li><a href="#contact"  data-en="Contact"  data-it="Contatti">Contact</a></li>
+  </ul>
+  <div class="nav-controls">
+    <button class="nav-btn" id="themeToggle">☀</button>
+    <button class="nav-btn" id="langToggle">IT</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-status">
+    <span class="status-ring"></span>
+    <span data-en="Available for work" data-it="Disponibile">Available for work</span>
+  </div>
+  <h1 data-en="Crafting digital<br>experiences with <em>precision.</em>"
+      data-it="Esperienze digitali<br>con <em>precisione.</em>">
+    Crafting digital<br>experiences with <em>precision.</em>
+  </h1>
+  <div class="hero-meta">
+    <p class="hero-desc"
+       data-en="Developer &amp; designer. Clean interfaces, thoughtful code. Based in Puglia, Italy."
+       data-it="Developer &amp; designer. Interfacce pulite, codice consapevole. Puglia, Italia.">
+      Developer &amp; designer. Clean interfaces, thoughtful code. Based in Puglia, Italy.
+    </p>
+    <div class="hero-index">
+      <span>Portfolio</span><br>
+      <span>2025</span><br>
+      <span style="color:var(--accent)">●</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="about">
+  <div class="sec-head reveal">
+    <span class="sec-label" data-en="About" data-it="Chi sono">About</span>
+    <span class="sec-num">01</span>
+  </div>
+  <div class="about-grid reveal">
+    <p class="about-copy"
+       data-en="I build digital products that feel <strong>inevitable</strong> — where every pixel earns its place. Obsessed with the intersection of design and code, and the details most people never notice."
+       data-it="Creo prodotti digitali che sembrano <strong>inevitabili</strong> — dove ogni pixel ha una ragione. Ossessionato dall'intersezione tra design e codice.">
+      I build digital products that feel <strong>inevitable</strong> — where every pixel earns its place. Obsessed with the intersection of design and code, and the details most people never notice.
+    </p>
+    <div class="meta-table">
+      <div class="meta-row">
+        <span class="meta-k" data-en="Role"      data-it="Ruolo">Role</span>
+        <span class="meta-v">Developer / Designer</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-k" data-en="Location"  data-it="Sede">Location</span>
+        <span class="meta-v" data-en="Puglia, Italy" data-it="Puglia, Italia">Puglia, Italy</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-k" data-en="Education" data-it="Istruzione">Education</span>
+        <span class="meta-v">ITIS — 5ª Superiore</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-k" data-en="Status"    data-it="Stato">Status</span>
+        <span class="meta-v" style="color:var(--accent)" data-en="Open to work" data-it="Disponibile">Open to work</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="projects" style="padding-top:0">
+  <div class="sec-head reveal">
+    <span class="sec-label" data-en="Selected Work" data-it="Lavori Selezionati">Selected Work</span>
+    <span class="sec-num">02</span>
+  </div>
+  <div class="proj-list">
+    <a class="proj reveal" href="#">
+      <span class="proj-n">01</span>
+      <div class="proj-info">
+        <h3>Project Lumi</h3>
+        <p data-en="Local AI Agent on Raspberry Pi 3B+ — 2024–2025" data-it="Agente AI locale su Raspberry Pi 3B+ — 2024–2025">Local AI Agent on Raspberry Pi 3B+ — 2024–2025</p>
+      </div>
+      <div class="proj-chips">
+        <span class="chip">Python</span><span class="chip">Linux</span>
+      </div>
+    </a>
+    <a class="proj reveal" href="#">
+      <span class="proj-n">02</span>
+      <div class="proj-info">
+        <h3>OriAntica <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;vertical-align:middle;margin-left:8px" data-en="in dev" data-it="in sviluppo">in dev</span></h3>
+        <p data-en="History &amp; legends of Oria (BR) — 2026" data-it="Storia e leggende di Oria (BR) — 2026">History &amp; legends of Oria (BR) — 2026</p>
+      </div>
+      <div class="proj-chips">
+        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
+      </div>
+    </a>
+    <a class="proj reveal" href="#">
+      <span class="proj-n">03</span>
+      <div class="proj-info">
+        <h3>MovieIndex</h3>
+        <p data-en="Studio Ghibli film catalog — 2025" data-it="Catalogo film Studio Ghibli — 2025">Studio Ghibli film catalog — 2025</p>
+      </div>
+      <div class="proj-chips">
+        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="wrap" id="skills" style="padding-top:0">
+  <div class="sec-head reveal">
+    <span class="sec-label" data-en="Skills" data-it="Competenze">Skills</span>
+    <span class="sec-num">03</span>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="sk"><div class="sk-ico">01/</div><h4>Frontend</h4><p data-en="HTML, CSS, JavaScript, React — clean, fast interfaces." data-it="HTML, CSS, JavaScript, React — interfacce pulite e veloci.">HTML, CSS, JavaScript, React — clean, fast interfaces.</p></div>
+    <div class="sk"><div class="sk-ico">02/</div><h4>Backend</h4><p data-en="Python, Node.js, REST APIs — solid foundations." data-it="Python, Node.js, REST API — fondamenta solide.">Python, Node.js, REST APIs — solid foundations.</p></div>
+    <div class="sk"><div class="sk-ico">03/</div><h4>Design</h4><p data-en="UI/UX, typography, layout — design that communicates intent." data-it="UI/UX, tipografia, layout — design che comunica.">UI/UX, typography, layout — design that communicates intent.</p></div>
+    <div class="sk"><div class="sk-ico">04/</div><h4>Databases</h4><p data-en="SQL, MongoDB — structured data, structured thinking." data-it="SQL, MongoDB — dati strutturati, pensiero strutturato.">SQL, MongoDB — structured data, structured thinking.</p></div>
+    <div class="sk"><div class="sk-ico">05/</div><h4>Tools</h4><p data-en="Git, Figma, VS Code, Linux — the full workshop." data-it="Git, Figma, VS Code, Linux — l'arsenale completo.">Git, Figma, VS Code, Linux — the full workshop.</p></div>
+    <div class="sk"><div class="sk-ico">06/</div><h4>Security</h4><p data-en="CTF, networking, forensics — curiosity-driven problem solving." data-it="CTF, networking, forensics — problem solving guidato dalla curiosità.">CTF, networking, forensics — curiosity-driven problem solving.</p></div>
+  </div>
+</div>
+
+<div class="contact-wrap" id="contact">
+  <div class="sec-head">
+    <span class="sec-label" data-en="Contact" data-it="Contatti">Contact</span>
+    <span class="sec-num">04</span>
+  </div>
+  <h2 class="contact-h reveal" data-en="Let's build<br>something together." data-it="Costruiamo<br>qualcosa insieme.">Let's build<br>something together.</h2>
+  <p class="contact-sub reveal" data-en="Interested in collaborating? Reach out." data-it="Interessato a collaborare? Scrivimi.">Interested in collaborating? Reach out.</p>
+  <div class="cta-row reveal">
+    <a href="mailto:your@email.com" class="cta cta-primary"><span data-en="Email me" data-it="Scrivimi">Email me</span></a>
+    <a href="#" class="cta"><span>GitHub</span></a>
+    <a href="#" class="cta"><span>LinkedIn</span></a>
+  </div>
+</div>
+
+<footer>
+  <span class="ft-l" data-en="© 2025 Francesco Moretto" data-it="© 2025 Francesco Moretto">© 2025 Francesco Moretto</span>
+  <span class="ft-r" data-en="Designed with precision." data-it="Progettato con precisione.">Designed with precision.</span>
+</footer>
+
+<script>
+const themeBtn=document.getElementById('themeToggle');
+let theme=localStorage.getItem('theme')||'dark';
+setTheme(theme);
+themeBtn.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('theme',theme);setTheme(theme)});
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀':'☾'}
+
+const langBtn=document.getElementById('langToggle');
+let lang=localStorage.getItem('lang')||'en';
+document.documentElement.lang=lang;applyLang();
+langBtn.addEventListener('click',()=>{lang=lang==='en'?'it':'en';localStorage.setItem('lang',lang);document.documentElement.lang=lang;applyLang()});
+function applyLang(){document.querySelectorAll('[data-en][data-it]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v});langBtn.textContent=lang==='en'?'IT':'EN'}
+
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
