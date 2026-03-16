@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV — Francesco</title>
+<title>cv-Francesco-/cv</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -26,7 +26,11 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--bg);
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(120, 40, 200, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 82% 78%, rgba(90, 20, 160, 0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 55% 45%, rgba(168, 85, 247, 0.05) 0%, transparent 70%),
+      var(--bg);
     color: var(--text);
     font-family: var(--font-mono);
     font-size: 13px;
@@ -181,11 +185,44 @@
   /* Projects */
   .project-list { list-style: none; }
   .project-list li {
+    display: grid;
+    grid-template-columns: 140px 14px 1fr;
+    gap: 0 6px;
+    align-items: baseline;
     line-height: 1.9;
     font-size: 12px;
+  }
+  .project-list li .proj-name {
+    color: var(--cyan);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .project-list li .proj-dash {
+    color: var(--text-muted);
+  }
+  .project-list li .proj-desc {
     color: var(--text-dim);
   }
-  .project-list li span { color: var(--cyan); font-weight: 500; }
+
+  /* Links — base style */
+  .project-list a,
+  .comp-list a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.25s;
+  }
+
+  /* Glow on hover */
+  .project-list a:hover,
+  .comp-list a:hover {
+    color: var(--purple-glow);
+    text-shadow:
+      0 0 8px rgba(192, 132, 252, 0.7),
+      0 0 20px rgba(168, 85, 247, 0.4),
+      0 0 40px rgba(168, 85, 247, 0.15);
+  }
 
   /* Competitions */
   .comp-list { list-style: none; }
@@ -257,6 +294,9 @@
     .name { font-size: 16px; }
     .cv-open, .cv-close { font-size: 20px; }
     .edu-row, .work-row { flex-direction: column; gap: 0; }
+    .project-list li {
+      grid-template-columns: 110px 14px 1fr;
+    }
   }
 </style>
 </head>
@@ -292,7 +332,7 @@
       <p class="about-text">
         Studente del 5° anno all'ITT Fermi di Francavilla Fontana, appassionato di sviluppo web,
         design UI/UX e cybersecurity. Cerco sempre il modo per trasformare idee in prodotti digitali
-        che uniscano funzionalità ed estetica.<span class="caret"></span>
+        che uniscano funzionalità e UI minimal.<span class="caret"></span>
       </p>
 
       <hr class="divider">
@@ -301,7 +341,7 @@
       <div class="section-title">education</div>
       <div class="edu-row">
         <span class="edu-name">Diploma Tecnico Informatico</span>
-        <span class="edu-period">2021 — 2026</span>
+        <span class="edu-period">settembre 2021 — giugno 2026</span>
       </div>
       <div class="edu-sub">ITT Enrico Fermi — Francavilla Fontana (BR)</div>
 
@@ -310,10 +350,26 @@
       <!-- Projects -->
       <div class="section-title">projects</div>
       <ul class="project-list">
-        <li>OriAntica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash; <span>sito informativo sulla storia di Oria, comprendente anche una sezione dedicata alle leggende popolari, tradizioni e luoghi tipici.</span></li>
-        <li>CTF Web Toolkit &nbsp;&nbsp;&nbsp;&mdash; <span><a href="https://github.com/Ryuzakxx/ctf-web-toolkit">raccolta di tool per richieste a server per web exploitation</a></span></li>
-        <li>MovieIndex &nbsp;&nbsp;&nbsp;&mdash; <span><a href="https://ryuzakxx.github.io/MovieIndex/">catalogo film con ricerca e filtri</a></span></li>
-        <li>Lumi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash; <span>AI locale su Raspberry Pi 3b+</span></li>
+        <li>
+          <span class="proj-name">OriAntica</span>
+          <span class="proj-dash">&mdash;</span>
+          <span class="proj-desc">sito informativo su storia, leggende e tradizioni di Oria</span>
+        </li>
+        <li>
+          <span class="proj-name">CTF Web Toolkit</span>
+          <span class="proj-dash">&mdash;</span>
+          <span class="proj-desc"><a href="https://github.com/Ryuzakxx/ctf-web-toolkit">raccolta di tool per web exploitation</a></span>
+        </li>
+        <li>
+          <span class="proj-name">MovieIndex</span>
+          <span class="proj-dash">&mdash;</span>
+          <span class="proj-desc"><a href="https://ryuzakxx.github.io/MovieIndex/">catalogo film con ricerca e filtri</a></span>
+        </li>
+        <li>
+          <span class="proj-name">Lumi</span>
+          <span class="proj-dash">&mdash;</span>
+          <span class="proj-desc">AI locale su Raspberry Pi 3b+ con riconoscimento vocale</span>
+        </li>
       </ul>
 
       <hr class="divider">
@@ -350,7 +406,7 @@
       <!-- Extracurricular -->
       <div class="section-title">extracurricular</div>
       <ul class="extra-list">
-        <li><b>Competizioni CTF</b> nazionali e internazionali</li>
+        <li><b>Sviluppo videogame 2d</b> in stile top-down pixel art</li>
         <li><b>Self-learning</b> Machine Learning </li>
         <li><b>Self-learning</b> UI/UX e web development</li>
       </ul>
