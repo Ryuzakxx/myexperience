@@ -13,6 +13,7 @@
     --purple: #a855f7;
     --purple-dim: #7c3aed;
     --purple-glow: #c084fc;
+    --accent-rgb: 168, 85, 247;
     --text: #e2d9f3;
     --text-dim: #9d8fc4;
     --text-muted: #5c4f7a;
@@ -27,9 +28,9 @@
 
   body {
     background:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(120, 40, 200, 0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 82% 78%, rgba(90, 20, 160, 0.09) 0%, transparent 55%),
-      radial-gradient(ellipse 40% 40% at 55% 45%, rgba(168, 85, 247, 0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(var(--accent-rgb), 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 82% 78%, rgba(var(--accent-rgb), 0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 55% 45%, rgba(var(--accent-rgb), 0.05) 0%, transparent 70%),
       var(--bg);
     color: var(--text);
     font-family: var(--font-mono);
@@ -50,8 +51,8 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(168, 85, 247, 0.015) 2px,
-      rgba(168, 85, 247, 0.015) 4px
+      rgba(var(--accent-rgb), 0.015) 2px,
+      rgba(var(--accent-rgb), 0.015) 4px
     );
     pointer-events: none;
     z-index: 100;
@@ -60,14 +61,16 @@
   .editor {
     width: 100%;
     max-width: 780px;
-    background: var(--surface);
+    background:
+      radial-gradient(circle at 84% 16%, rgba(var(--accent-rgb), 0.09) 0%, transparent 48%),
+      linear-gradient(165deg, rgba(var(--accent-rgb), 0.06) 0%, rgba(19, 16, 31, 0.96) 35%, rgba(19, 16, 31, 0.98) 100%);
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(168,85,247,0.1),
-      0 0 40px rgba(168,85,247,0.08),
-      0 0 80px rgba(168,85,247,0.04),
+      0 0 0 1px rgba(var(--accent-rgb), 0.1),
+      0 0 40px rgba(var(--accent-rgb), 0.08),
+      0 0 80px rgba(var(--accent-rgb), 0.04),
       0 20px 60px rgba(0,0,0,0.6);
     animation: fadeIn 0.6s ease forwards;
   }
@@ -83,6 +86,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
   }
   .dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -115,9 +119,44 @@
   }
   .tab.lang-switch:hover {
     color: var(--purple-glow);
-    border-color: rgba(168,85,247,0.35);
-    background: rgba(168,85,247,0.06);
-    text-shadow: 0 0 10px rgba(192,132,252,0.5);
+    border-color: rgba(var(--accent-rgb), 0.35);
+    background: rgba(var(--accent-rgb), 0.06);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+  }
+
+  .theme-picker {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .theme-picker label {
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .theme-picker select {
+    background: linear-gradient(
+      180deg,
+      rgba(var(--accent-rgb), 0.22) 0%,
+      rgba(8, 12, 24, 0.94) 100%
+    );
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
+    color: #f6f3ff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+  }
+  .theme-picker select option {
+    background: #0f1424;
+    color: #f6f3ff;
+  }
+  .theme-picker select:focus {
+    box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.6);
   }
 
   .code-body { display: flex; }
@@ -160,16 +199,16 @@
     image-rendering: pixelated;
     opacity: 0.80;
     filter:
-      drop-shadow(0 0 6px rgba(168, 85, 247, 0.75))
-      drop-shadow(0 0 20px rgba(168, 85, 247, 0.35));
+      drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.75))
+      drop-shadow(0 0 20px rgba(var(--accent-rgb), 0.35));
     transition: opacity 0.3s, filter 0.35s, transform 0.35s;
   }
   .mascot:hover {
     opacity: 1;
     transform: scale(1) translateY(-1.5px);
     filter:
-      drop-shadow(0 0 10px rgba(192, 132, 252, 0.562))
-      drop-shadow(0 0 30px rgba(169, 85, 247, 0.356));
+      drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.62))
+      drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.36));
   }
 
   .cv-open  { color: var(--purple); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; }
@@ -220,11 +259,11 @@
     font-size: 11px;
     font-style: italic;
     text-shadow:
-      0 0 6px rgba(82, 0, 189, 0.514),
-      0 0 16px rgba(92, 108, 255, 0.5),
+      0 0 6px rgba(var(--accent-rgb), 0.514),
+      0 0 16px rgba(var(--accent-rgb), 0.5),
       0 0 32px rgba(255, 255, 255, 0.2);
   }
-  .edu-period:hover { cursor: progress; }
+  .edu-period:hover { cursor: wait; }
   .edu-sub { color: var(--text-dim); font-size: 11px; }
 
   .project-list { list-style: none; }
@@ -285,8 +324,8 @@
     margin-top: 4px;
   }
   .skill-tag {
-    background: rgba(168,85,247,0.1);
-    border: 1px solid rgba(168,85,247,0.25);
+    background: rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), 0.25);
     color: var(--purple-glow);
     padding: 2px 10px;
     border-radius: 3px;
@@ -294,8 +333,8 @@
     transition: background 0.2s, border-color 0.2s;
   }
   .skill-tag:hover {
-    background: rgba(168,85,247,0.2);
-    border-color: rgba(168,85,247,0.5);
+    background: rgba(var(--accent-rgb), 0.2);
+    border-color: rgba(var(--accent-rgb), 0.5);
   }
 
   .extra-list { list-style: none; }
@@ -318,6 +357,11 @@
   }
 
   @media (max-width: 540px) {
+    .theme-picker {
+      width: 100%;
+      margin-left: 0;
+      justify-content: flex-end;
+    }
     .content { padding: 16px; }
     .name { font-size: 16px; }
     .cv-open, .cv-close { font-size: 20px; }
@@ -338,13 +382,17 @@
     <div class="tab" id="tab-active"></div>
     <!-- Tab inattivo: click per cambiare lingua -->
     <div class="tab lang-switch" id="tab-switch" onclick="toggleLang()"></div>
+    <div class="theme-picker">
+      <label id="theme-label" for="theme-select">theme</label>
+      <select id="theme-select" onchange="setTheme(this.value)"></select>
+    </div>
   </div>
 
   <div class="code-body">
     <div class="gutter" id="gutter"></div>
 
     <div class="content" id="cv-content">
-      <img class="mascot" src="./gengar.png" alt="gengar" title="👻">
+      <img class="mascot" id="mascot" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="Gengar" title="Gengar">
 
       <div class="cv-open">&lt;cv&gt;</div>
       <div class="name">Francesco</div>
@@ -442,6 +490,7 @@ const T = {
       '<b>Self-learning</b> UI/UX e web development',
     ],
     socials : 'socials',
+    themeLabel: 'tema',
   },
   en: {
     tabActive : 'cv-en.html',
@@ -477,10 +526,106 @@ const T = {
       '<b>Self-learning</b> UI/UX and web development',
     ],
     socials : 'socials',
+    themeLabel: 'theme',
+  }
+};
+
+const THEMES = {
+  violet: {
+    labelIt: 'Viola - Gengar',
+    labelEn: 'Violet - Gengar',
+    accent: '#a855f7',
+    accentDim: '#7c3aed',
+    accentGlow: '#c084fc',
+    accentRgb: '168, 85, 247',
+    border: '#2a1f4a',
+    mascot: {
+      name: 'Gengar',
+      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png'
+    }
+  },
+  cyan: {
+    labelIt: 'Ciano - Lucario',
+    labelEn: 'Cyan - Lucario',
+    accent: '#22d3ee',
+    accentDim: '#0891b2',
+    accentGlow: '#67e8f9',
+    accentRgb: '34, 211, 238',
+    border: '#0e3742',
+    mascot: {
+      name: 'Lucario',
+      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png'
+    }
+  },
+  emerald: {
+    labelIt: 'Verde - Bulbasaur',
+    labelEn: 'Green - Bulbasaur',
+    accent: '#4ade80',
+    accentDim: '#16a34a',
+    accentGlow: '#86efac',
+    accentRgb: '74, 222, 128',
+    border: '#17422a',
+    mascot: {
+      name: 'Bulbasaur',
+      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
+    }
+  },
+  amber: {
+    labelIt: 'Arancio - Charizard',
+    labelEn: 'Orange - Charizard',
+    accent: '#fb923c',
+    accentDim: '#ea580c',
+    accentGlow: '#fdba74',
+    accentRgb: '251, 146, 60',
+    border: '#4a2c14',
+    mascot: {
+      name: 'Charizard',
+      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png'
+    }
+  },
+  rose: {
+    labelIt: 'Rosa - Jigglypuff',
+    labelEn: 'Pink - Jigglypuff',
+    accent: '#f472b6',
+    accentDim: '#db2777',
+    accentGlow: '#f9a8d4',
+    accentRgb: '244, 114, 182',
+    border: '#4b1f36',
+    mascot: {
+      name: 'Jigglypuff',
+      sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png'
+    }
   }
 };
 
 let lang = 'it';
+let themeKey = 'violet';
+
+function initThemePicker() {
+  const select = document.getElementById('theme-select');
+  const labelKey = lang === 'en' ? 'labelEn' : 'labelIt';
+  select.innerHTML = Object.entries(THEMES)
+    .map(([key, theme]) => `<option value="${key}">${theme[labelKey]}</option>`)
+    .join('');
+  select.value = themeKey;
+}
+
+function setTheme(nextKey) {
+  const nextTheme = THEMES[nextKey] || THEMES.violet;
+  themeKey = THEMES[nextKey] ? nextKey : 'violet';
+
+  const root = document.documentElement;
+  root.style.setProperty('--purple', nextTheme.accent);
+  root.style.setProperty('--purple-dim', nextTheme.accentDim);
+  root.style.setProperty('--purple-glow', nextTheme.accentGlow);
+  root.style.setProperty('--accent-rgb', nextTheme.accentRgb);
+  root.style.setProperty('--border', nextTheme.border);
+
+  const mascot = document.getElementById('mascot');
+  mascot.src = nextTheme.mascot.sprite;
+  mascot.alt = nextTheme.mascot.name;
+  mascot.title = nextTheme.mascot.name;
+}
 
 function render(t) {
   document.getElementById('tab-active').textContent       = t.tabActive;
@@ -493,6 +638,8 @@ function render(t) {
   document.getElementById('lbl-skills').textContent       = t.skills;
   document.getElementById('lbl-extra').textContent        = t.extra;
   document.getElementById('lbl-socials').textContent      = t.socials;
+  document.getElementById('theme-label').textContent      = t.themeLabel;
+  initThemePicker();
   document.getElementById('edu-name').textContent         = t.eduName;
   document.getElementById('edu-period').textContent       = t.eduPeriod;
 
@@ -542,6 +689,8 @@ function updateGutter() {
 }
 
 render(T[lang]);
+initThemePicker();
+setTheme(themeKey);
 window.addEventListener('resize', updateGutter);
 </script>
 
