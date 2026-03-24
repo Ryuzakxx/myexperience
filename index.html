@@ -94,7 +94,6 @@
   .dot.yellow { background: #febc2e; }
   .dot.green  { background: #28c840; }
 
-  /* Tab attivo */
   .tab {
     margin-left: 12px;
     background: var(--surface);
@@ -108,7 +107,6 @@
     font-family: var(--font-mono);
   }
 
-  /* Tab lingua inattiva — cliccabile */
   .tab.lang-switch {
     cursor: pointer;
     color: var(--text-muted);
@@ -188,7 +186,6 @@
   }
   .content.fading { opacity: 0; }
 
-  /* ── Mascotte ── */
   .mascot {
     position: absolute;
     top: 16px;
@@ -341,6 +338,27 @@
   .extra-list li { font-size: 12px; line-height: 1.9; color: var(--text-dim); }
   .extra-list li b { color: var(--green); }
 
+  /* ── Certifications ── */
+  .cert-list { list-style: none; }
+  .cert-list li { font-size: 12px; line-height: 1.9; color: var(--text-dim); }
+  .cert-list li .cert-name {
+    color: var(--green);
+    font-weight: 500;
+    transition: color 0.2s, text-shadow 0.25s;
+  }
+  .cert-list li a:hover .cert-name {
+    color: #ffffff;
+    text-shadow:
+      0 0 6px rgba(255,255,255,0.9),
+      0 0 16px rgba(255,255,255,0.5),
+      0 0 32px rgba(255,255,255,0.2);
+  }
+  .cert-list li .cert-issuer {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-left: 6px;
+  }
+
   .divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
 
   .caret {
@@ -378,9 +396,7 @@
     <div class="dot red"></div>
     <div class="dot yellow"></div>
     <div class="dot green"></div>
-    <!-- Tab attivo: mostra la lingua corrente -->
     <div class="tab" id="tab-active"></div>
-    <!-- Tab inattivo: click per cambiare lingua -->
     <div class="tab lang-switch" id="tab-switch" onclick="toggleLang()"></div>
     <div class="theme-picker">
       <label id="theme-label" for="theme-select">theme</label>
@@ -440,12 +456,17 @@
 
       <hr class="divider">
 
+      <div class="section-title" id="lbl-certs"></div>
+      <ul class="cert-list" id="cert-list"></ul>
+
+      <hr class="divider">
+
       <div class="section-title" id="lbl-extra"></div>
       <ul class="extra-list" id="extra-list"></ul>
 
       <div class="section-title" id="lbl-socials"></div>
-      <span class="skill-tag"><a href="https://www.linkedin.com/in/francesco-moretto-a57520332/">Linkedin</a></span>
-      <span class="skill-tag"><a href="https://github.com/Ryuzakxx">Github</a></span>
+      <span class="skill-tag"><a href="https://www.linkedin.com/in/francesco-moretto-a57520332/" target="_blank" rel="noopener">Linkedin</a></span>
+      <span class="skill-tag"><a href="https://github.com/Ryuzakxx" target="_blank" rel="noopener">Github</a></span>
 
       <br>
       <div class="cv-close">&lt;/cv&gt;</div>
@@ -468,11 +489,11 @@ const T = {
     projects  : 'projects',
     projectList: [
       { name: 'OriAntica',         desc: 'sito informativo su storia, leggende e tradizioni di Oria <i>(in dev)</i>' },
-      { name: 'CTF Web Toolkit',   desc: '<a href="https://github.com/Ryuzakxx/ctf-web-toolkit">raccolta di tool per web exploitation</a>' },
-      { name: 'MovieIndex',        desc: '<a href="https://github.com/Ryuzakxx/MovieIndex">catalogo top 10 film dello Studio Ghibli</a>' },
-      { name: 'Lumi',              desc: '<a href="https://github.com/Ryuzakxx/lumi">AI locale su Raspberry Pi 3b+ con riconoscimento vocale <i>(in dev)</i></a>' },
-      { name: 'Calcolo equazione', desc: '<a href="https://github.com/Ryuzakxx/Calcolo-equazione-2-grado">App .NET 8.0 per calcolare equazioni di 2° grado</a>' },
-      { name: 'CManager',          desc: '<a href="https://github.com/Ryuzakxx/CManager">App C# per la gestione dei punti di un GP di F1</a>' },
+      { name: 'CTF Web Toolkit',   desc: '<a href="https://github.com/Ryuzakxx/ctf-web-toolkit" target="_blank" rel="noopener">raccolta di tool per web exploitation</a>' },
+      { name: 'MovieIndex',        desc: '<a href="https://github.com/Ryuzakxx/MovieIndex" target="_blank" rel="noopener">catalogo top 10 film dello Studio Ghibli</a>' },
+      { name: 'Lumi',              desc: '<a href="https://github.com/Ryuzakxx/lumi" target="_blank" rel="noopener">AI locale su Raspberry Pi 3b+ con riconoscimento vocale <i>(in dev)</i></a>' },
+      { name: 'Calcolo equazione', desc: '<a href="https://github.com/Ryuzakxx/Calcolo-equazione-2-grado" target="_blank" rel="noopener">App .NET 8.0 per calcolare equazioni di 2° grado</a>' },
+      { name: 'CManager',          desc: '<a href="https://github.com/Ryuzakxx/CManager" target="_blank" rel="noopener">App C# per la gestione dei punti di un GP di F1</a>' },
     ],
     competitions: 'competitions',
     compList: [
@@ -483,10 +504,14 @@ const T = {
       '<b>3rd Place</b> — <span class="comp-link">Hackathon "For Web" ITT Enrico Fermi 2024</span>',
     ],
     skills  : 'skills',
+    certs   : 'certifications',
+    certList: [
+      { name: 'Claude 101',           issuer: 'Anthropic',  file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
+      { name: 'OliCyber.IT 2026 — Attestato territoriale', issuer: 'Olicyber & CINI', file: './certifications/OliCyber.IT%202026%20-%20Attestato%20territoriale%20-%20MORETTO%20Francesco.pdf' },
+    ],
     extra   : 'extracurricular',
     extraList: [
       '<b>Sviluppo videogame 2d</b> in stile top-down pixel art <i>(in dev)</i>',
-      '<b>Self-learning</b> Understanding AI — Anthropic Certifications',
       '<b>Self-learning</b> UI/UX e web development',
     ],
     socials : 'socials',
@@ -504,11 +529,11 @@ const T = {
     projects  : 'projects',
     projectList: [
       { name: 'OriAntica',         desc: 'informational site on history, legends and traditions of Oria <i>(in dev)</i>' },
-      { name: 'CTF Web Toolkit',   desc: '<a href="https://github.com/Ryuzakxx/ctf-web-toolkit">collection of tools for web exploitation</a>' },
-      { name: 'MovieIndex',        desc: '<a href="https://github.com/Ryuzakxx/MovieIndex">top 10 Studio Ghibli film catalogue</a>' },
-      { name: 'Lumi',              desc: '<a href="https://github.com/Ryuzakxx/lumi">local AI on Raspberry Pi 3b+ with voice recognition <i>(in dev)</i></a>' },
-      { name: 'Calcolo equazione', desc: '<a href="https://github.com/Ryuzakxx/Calcolo-equazione-2-grado">.NET 8.0 app to solve quadratic equations</a>' },
-      { name: 'CManager',          desc: '<a href="https://github.com/Ryuzakxx/CManager">C# app for managing F1 Grand Prix standings</a>' },
+      { name: 'CTF Web Toolkit',   desc: '<a href="https://github.com/Ryuzakxx/ctf-web-toolkit" target="_blank" rel="noopener">collection of tools for web exploitation</a>' },
+      { name: 'MovieIndex',        desc: '<a href="https://github.com/Ryuzakxx/MovieIndex" target="_blank" rel="noopener">top 10 Studio Ghibli film catalogue</a>' },
+      { name: 'Lumi',              desc: '<a href="https://github.com/Ryuzakxx/lumi" target="_blank" rel="noopener">local AI on Raspberry Pi 3b+ with voice recognition <i>(in dev)</i></a>' },
+      { name: 'Calcolo equazione', desc: '<a href="https://github.com/Ryuzakxx/Calcolo-equazione-2-grado" target="_blank" rel="noopener">.NET 8.0 app to solve quadratic equations</a>' },
+      { name: 'CManager',          desc: '<a href="https://github.com/Ryuzakxx/CManager" target="_blank" rel="noopener">C# app for managing F1 Grand Prix standings</a>' },
     ],
     competitions: 'competitions',
     compList: [
@@ -519,10 +544,14 @@ const T = {
       '<b>3rd Place</b> — <span class="comp-link">Hackathon "For Web" ITT Enrico Fermi 2024</span>',
     ],
     skills  : 'skills',
+    certs   : 'certifications',
+    certList: [
+      { name: 'Claude 101',           issuer: 'Anthropic',  file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
+      { name: 'OliCyber.IT 2026 — Territorial Certificate', issuer: 'Olicyber & CINI', file: './certifications/OliCyber.IT%202026%20-%20Attestato%20territoriale%20-%20MORETTO%20Francesco.pdf' },
+    ],
     extra   : 'extracurricular',
     extraList: [
       '<b>2D game development</b> in top-down pixel art style <i>(in dev)</i>',
-      '<b>Self-learning</b> Understanding AI — Anthropic Certifications',
       '<b>Self-learning</b> UI/UX and web development',
     ],
     socials : 'socials',
@@ -636,6 +665,7 @@ function render(t) {
   document.getElementById('lbl-projects').textContent     = t.projects;
   document.getElementById('lbl-competitions').textContent = t.competitions;
   document.getElementById('lbl-skills').textContent       = t.skills;
+  document.getElementById('lbl-certs').textContent        = t.certs;
   document.getElementById('lbl-extra').textContent        = t.extra;
   document.getElementById('lbl-socials').textContent      = t.socials;
   document.getElementById('theme-label').textContent      = t.themeLabel;
@@ -655,6 +685,14 @@ function render(t) {
 
   document.getElementById('comp-list').innerHTML =
     t.compList.map(c => `<li>${c}</li>`).join('');
+
+  document.getElementById('cert-list').innerHTML =
+    t.certList.map(c => `<li>
+      <a href="${c.file}" target="_blank" rel="noopener">
+        <span class="cert-name">${c.name}</span>
+      </a>
+      <span class="cert-issuer">— ${c.issuer}</span>
+    </li>`).join('');
 
   document.getElementById('extra-list').innerHTML =
     t.extraList.map(e => `<li>${e}</li>`).join('');
