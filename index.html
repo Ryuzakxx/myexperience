@@ -338,6 +338,21 @@
   .extra-list li { font-size: 12px; line-height: 1.9; color: var(--text-dim); }
   .extra-list li b { color: var(--green); }
 
+  /* ── Itch.io embed ── */
+  .itch-embed {
+    margin-top: 10px;
+    max-width: 552px;
+    width: 100%;
+  }
+  .itch-embed iframe {
+    width: 100%;
+    max-width: 552px;
+    height: 167px;
+    border: none;
+    border-radius: 4px;
+    display: block;
+  }
+
   /* ── Certifications ── */
   .cert-list { list-style: none; }
   .cert-list li { font-size: 12px; line-height: 1.9; color: var(--text-dim); }
@@ -385,6 +400,7 @@
     .cv-open, .cv-close { font-size: 20px; }
     .project-list li { grid-template-columns: 110px 14px 1fr; }
     .mascot { width: 60px; height: 60px; top: 12px; right: 12px; }
+    .itch-embed iframe { height: 140px; }
   }
 </style>
 </head>
@@ -462,6 +478,14 @@
       <hr class="divider">
 
       <div class="section-title" id="lbl-extra"></div>
+      <div class="itch-embed">
+        <iframe
+          frameborder="0"
+          src="https://itch.io/embed/4440063?bg_color=000000&amp;fg_color=ffffff&amp;link_color=fa5c5c&amp;border_color=333333"
+          allowfullscreen>
+          <a href="https://ryuzaki555.itch.io/i-forgot-your-name">I Forgot Your Name by ryuzaki555</a>
+        </iframe>
+      </div>
       <ul class="extra-list" id="extra-list"></ul>
 
       <div class="section-title" id="lbl-socials"></div>
@@ -506,10 +530,10 @@ const T = {
     skills  : 'skills',
     certs   : 'certifications',
     certList: [
-      { name: 'Claude 101',           issuer: 'Anthropic',  file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
-      { name: 'Claude Code',           issuer: 'Anthropic',  file: './certifications/certificate-agx6hegz7jvx-1774463271.pdf' },
-      { name: 'AI Fluency',           issuer: 'Anthropic',  file: './certifications/certificate-qtwgpgm5jhyn-1774464293.pdf' },
-      { name: 'EF SET English Certification',           issuer: 'EF SET',  file: './certifications/EF SET Certificate.pdf' },
+      { name: 'Claude 101',                                issuer: 'Anthropic',       file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
+      { name: 'Claude Code',                               issuer: 'Anthropic',       file: './certifications/certificate-agx6hegz7jvx-1774463271.pdf' },
+      { name: 'AI Fluency',                                issuer: 'Anthropic',       file: './certifications/certificate-qtwgpgm5jhyn-1774464293.pdf' },
+      { name: 'EF SET English Certification',              issuer: 'EF SET',          file: './certifications/EF SET Certificate.pdf' },
       { name: 'OliCyber.IT 2026 — Attestato territoriale', issuer: 'Olicyber & CINI', file: './certifications/OliCyber.IT%202026%20-%20Attestato%20territoriale%20-%20MORETTO%20Francesco.pdf' },
     ],
     extra   : 'extracurricular',
@@ -549,11 +573,11 @@ const T = {
     skills  : 'skills',
     certs   : 'certifications',
     certList: [
-      { name: 'Claude 101',           issuer: 'Anthropic',  file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
-      { name: 'Claude Code',           issuer: 'Anthropic',  file: './certifications/certificate-agx6hegz7jvx-1774463271.pdf' },
-      { name: 'AI Fluency',           issuer: 'Anthropic',  file: './certifications/certificate-qtwgpgm5jhyn-1774464293.pdf' },
-      { name: 'EF SET English Certification',           issuer: 'EF SET',  file: './certifications/EF SET Certificate.pdf' },
-      { name: 'OliCyber.IT 2026 — Territorial Certificate', issuer: 'Olicyber & CINI', file: './certifications/OliCyber.IT%202026%20-%20Attestato%20territoriale%20-%20MORETTO%20Francesco.pdf' },
+      { name: 'Claude 101',                                    issuer: 'Anthropic',       file: './certifications/certificate-e3r7xnuuvcfe-1773568376.pdf' },
+      { name: 'Claude Code',                                   issuer: 'Anthropic',       file: './certifications/certificate-agx6hegz7jvx-1774463271.pdf' },
+      { name: 'AI Fluency',                                    issuer: 'Anthropic',       file: './certifications/certificate-qtwgpgm5jhyn-1774464293.pdf' },
+      { name: 'EF SET English Certification',                  issuer: 'EF SET',          file: './certifications/EF SET Certificate.pdf' },
+      { name: 'OliCyber.IT 2026 — Territorial Certificate',   issuer: 'Olicyber & CINI', file: './certifications/OliCyber.IT%202026%20-%20Attestato%20territoriale%20-%20MORETTO%20Francesco.pdf' },
     ],
     extra   : 'extracurricular',
     extraList: [
