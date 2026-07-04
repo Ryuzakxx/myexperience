@@ -262,7 +262,7 @@
   }
   .edu-sub { color: var(--text-dim); font-size: 11px; }
 
-  .project-list { list-style: none; }
+  .project-list, .exp-list { list-style: none; padding-left: 0; }
   .project-list li {
     display: grid;
     grid-template-columns: 140px 14px 1fr;
@@ -280,6 +280,45 @@
   }
   .project-list li .proj-dash { color: var(--text-muted); }
   .project-list li .proj-desc { color: var(--text-dim); }
+
+  .exp-list {
+    margin-top: 8px;
+    padding-left: 0;
+  }
+  .exp-list li {
+    padding: 14px 16px;
+    border: 1px solid rgba(var(--accent-rgb), 0.16);
+    border-radius: 10px;
+    background: rgba(var(--accent-rgb), 0.04);
+    display: grid;
+    gap: 8px;
+  }
+  .exp-list li:last-child { margin-bottom: 0; }
+  .exp-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .exp-role {
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .exp-company {
+    color: var(--text);
+    font-size: 12px;
+  }
+  .exp-meta {
+    color: var(--purple-glow);
+    font-size: 11px;
+    font-style: italic;
+  }
+  .exp-desc {
+    color: var(--text-dim);
+    font-size: 12px;
+    line-height: 1.8;
+  }
 
   a {
     color: inherit;
@@ -445,6 +484,10 @@
 
       <hr class="divider">
 
+      <div class="section-title" id="lbl-experience"></div>
+  <ul class="exp-list" id="exp-list"></ul>
+      <hr class="divider">
+
       <div class="section-title" id="lbl-projects"></div>
       <ul class="project-list" id="project-list"></ul>
 
@@ -509,6 +552,10 @@ const T = {
     edu       : 'education',
     eduName   : 'Diploma Tecnico Informatico — 95/100',
     eduPeriod : 'settembre 2021 — giugno 2026',
+    experience: 'esperienza lavorativa',
+    experienceList: [
+      { role: 'Software Developer - AI Automation', company: 'Oikos Immobiliare & Moonety SRL', period: 'Giugno 2025 — Agosto 2025', desc: 'Sviluppo di workflow automatizzati con n8n, integrazione di API e soluzioni di Intelligenza Artificiale per elaborazione ed estrazione di dati da documenti PDF. Realizzazione di codice personalizzato per estendere le funzionalità del sistema e ottimizzare i processi aziendali.' },
+    ],
     projects  : 'projects',
     projectList: [
       { name: 'OriAntica',         desc: 'sito informativo su storia, leggende e tradizioni di Oria' },
@@ -552,6 +599,10 @@ const T = {
     edu       : 'education',
     eduName   : 'Technical Diploma in Computer Science — 95/100',
     eduPeriod : 'September 2021 — June 2026',
+    experience: 'work experience',
+    experienceList: [
+      { role: 'Software Developer - AI Automation', company: 'Oikos Immobiliare & Moonety SRL', period: 'June 2025 — August 2025', desc: 'Designed and deployed automated n8n workflows, integrated APIs and AI-driven PDF data extraction, and built custom extensions to improve system capabilities and streamline business operations.' },
+    ],
     projects  : 'projects',
     projectList: [
       { name: 'OriAntica',         desc: 'informational site on history, legends and traditions of Oria' },
@@ -691,6 +742,7 @@ function render(t) {
   document.getElementById('role').innerHTML               = t.role;
   document.getElementById('lbl-about').textContent        = t.about;
   document.getElementById('lbl-edu').textContent          = t.edu;
+  document.getElementById('lbl-experience').textContent   = t.experience;
   document.getElementById('lbl-projects').textContent     = t.projects;
   document.getElementById('lbl-competitions').textContent = t.competitions;
   document.getElementById('lbl-skills').textContent       = t.skills;
@@ -704,6 +756,16 @@ function render(t) {
 
   document.getElementById('about-text').innerHTML =
     t.aboutText + '<span class="caret"></span>';
+
+  document.getElementById('exp-list').innerHTML =
+    t.experienceList.map(e => `<li>
+      <div class="exp-header">
+        <span class="exp-role">${e.role}</span>
+        <span class="exp-company">${e.company}</span>
+      </div>
+      <div class="exp-meta">${e.period}</div>
+      <div class="exp-desc">${e.desc}</div>
+    </li>`).join('');
 
   document.getElementById('project-list').innerHTML =
     t.projectList.map(p => `<li>
