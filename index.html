@@ -219,6 +219,7 @@
     letter-spacing: 0.03em;
   }
   .role { color: var(--text-dim); font-size: 12px; margin-top: 2px; }
+  .cv-view-wrap { margin-top: 10px; }
 
   .section-title {
     color: var(--purple);
@@ -467,6 +468,9 @@
       <div class="cv-open">&lt;cv&gt;</div>
       <div class="name">Francesco</div>
       <div class="role" id="role"></div>
+      <div class="cv-view-wrap">
+        <span class="skill-tag"><a id="cv-view" href="#" target="_blank" rel="noopener"></a></span>
+      </div>
 
       <hr class="divider">
 
@@ -588,6 +592,8 @@ const T = {
       '<b>Self-learning</b> UI/UX e web development',
     ],
     socials : 'socials',
+    cvLabel : 'Vedi CV',
+    cvFile  : './certifications/cv_francesco_moretto-it.pdf',
     themeLabel: 'tema',
   },
   en: {
@@ -635,6 +641,8 @@ const T = {
       '<b>Self-learning</b> UI/UX and web development',
     ],
     socials : 'socials',
+    cvLabel : 'View CV',
+    cvFile  : '../certifications/cv_francesco_moretto-en.pdf',
     themeLabel: 'theme',
   }
 };
@@ -750,6 +758,8 @@ function render(t) {
   document.getElementById('lbl-extra').textContent        = t.extra;
   document.getElementById('lbl-socials').textContent      = t.socials;
   document.getElementById('theme-label').textContent      = t.themeLabel;
+  document.getElementById('cv-view').textContent      = t.cvLabel;
+  document.getElementById('cv-view').href             = t.cvFile;
   initThemePicker();
   document.getElementById('edu-name').textContent         = t.eduName;
   document.getElementById('edu-period').textContent       = t.eduPeriod;
