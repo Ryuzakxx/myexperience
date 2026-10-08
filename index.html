@@ -320,6 +320,11 @@
     font-size: 12px;
     line-height: 1.8;
   }
+  .exp-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
 
   a {
     color: inherit;
@@ -492,6 +497,11 @@
   <ul class="exp-list" id="exp-list"></ul>
       <hr class="divider">
 
+      <div class="section-title" id="lbl-featured"></div>
+      <ul class="exp-list" id="featured-list"></ul>
+
+      <hr class="divider">
+
       <div class="section-title" id="lbl-projects"></div>
       <ul class="project-list" id="project-list"></ul>
 
@@ -560,6 +570,12 @@ const T = {
     experienceList: [
       { role: 'Software Developer - AI Automation', company: 'Oikos Immobiliare & Moonety SRL', period: 'Giugno 2025 — Agosto 2025', desc: 'Sviluppo di workflow automatizzati con n8n, integrazione di API e soluzioni di Intelligenza Artificiale per elaborazione ed estrazione di dati da documenti PDF. Realizzazione di codice personalizzato per estendere le funzionalità del sistema e ottimizzare i processi aziendali.' },
     ],
+    featured  : 'progetto principale',
+    featuredList: [
+      { name: 'Ari', tagline: 'assistente IA per il desktop', meta: 'Beta — progetto personale in sviluppo', desc: "Avatar animato che vive in un angolo dello schermo: le parli, ti risponde a voce, cerca sul web e si ricorda di te. Sito vetrina in HTML, CSS e JavaScript con funzionalità, cronologia delle versioni e video demo.", links: [
+        { label: 'Sito live', href: 'https://ryuzakxx.github.io/ari-showcase/' },
+      ] },
+    ],
     projects  : 'projects',
     projectList: [
       { name: 'OriAntica',         desc: '<a href="https://oriantica.oriahistory.workers.dev/" target="_blank" rel="noopener">sito informativo su storia, leggende e tradizioni di Oria</a>' },
@@ -608,6 +624,12 @@ const T = {
     experience: 'work experience',
     experienceList: [
       { role: 'Software Developer - AI Automation', company: 'Oikos Immobiliare & Moonety SRL', period: 'June 2025 — August 2025', desc: 'Designed and deployed automated n8n workflows, integrated APIs and AI-driven PDF data extraction, and built custom extensions to improve system capabilities and streamline business operations.' },
+    ],
+    featured  : 'featured project',
+    featuredList: [
+      { name: 'Ari', tagline: 'AI desktop assistant', meta: 'Beta — personal project in development', desc: "An animated avatar living in a corner of your screen: talk to it and it answers out loud, searches the web and remembers you. Showcase site in HTML, CSS and JavaScript covering features, version history and demo videos.", links: [
+        { label: 'Live site', href: 'https://ryuzakxx.github.io/ari-showcase/' },
+      ] },
     ],
     projects  : 'projects',
     projectList: [
@@ -751,6 +773,7 @@ function render(t) {
   document.getElementById('lbl-about').textContent        = t.about;
   document.getElementById('lbl-edu').textContent          = t.edu;
   document.getElementById('lbl-experience').textContent   = t.experience;
+  document.getElementById('lbl-featured').textContent     = t.featured;
   document.getElementById('lbl-projects').textContent     = t.projects;
   document.getElementById('lbl-competitions').textContent = t.competitions;
   document.getElementById('lbl-skills').textContent       = t.skills;
@@ -775,6 +798,19 @@ function render(t) {
       </div>
       <div class="exp-meta">${e.period}</div>
       <div class="exp-desc">${e.desc}</div>
+    </li>`).join('');
+
+  document.getElementById('featured-list').innerHTML =
+    t.featuredList.map(f => `<li>
+      <div class="exp-header">
+        <span class="exp-role">${f.name}</span>
+        <span class="exp-company">${f.tagline}</span>
+      </div>
+      <div class="exp-meta">${f.meta}</div>
+      <div class="exp-desc">${f.desc}</div>
+      <div class="exp-links">
+        ${f.links.map(l => `<span class="skill-tag"><a href="${l.href}" target="_blank" rel="noopener">${l.label}</a></span>`).join('')}
+      </div>
     </li>`).join('');
 
   document.getElementById('project-list').innerHTML =
